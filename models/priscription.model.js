@@ -1,31 +1,41 @@
 import mongoose from 'mongoose'
 
 
-const priscriptionSchema = new mongoose.Schema({
+const prescriptionSchema = new mongoose.Schema({
     appoinmentId:{
         type: mongoose.Schema.Types.ObjectId,
-        ref:"Appoinment"
+        ref:"Appoinment",
+        required:true
       },
-    stockId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Stock"
+    medicinNameWithQty:{
+        type:String,
+        required:true
     },
-    // doctorId:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref:"Doctor"
+    // QuantityOfMedicin:{
+    //     type:Number,
+    //     required:true
     // },
-    QuantityOfMedicin:{
-        type:Number,
-        required:true
+    // DateOfIssue:{
+    //     type:Date,
+    //     default:Date.now,
+    //     required:true
+    // }
+    // stockId:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:"Stock"
+    // },
+    doctorId:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User"
     },
-    DateOfIssue:{
-        type:Date,
-        default:Date.now,
-        required:true
-    }
-})
+    userId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"User"
+    },
+   
+},{timestamps:true})
 
-export const priscriptionModel = mongoose.model('Priscription',priscriptionSchema)
+export const prescriptionModel = mongoose.model('Prescription',prescriptionSchema)
 
 
 

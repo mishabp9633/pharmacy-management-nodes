@@ -111,27 +111,27 @@ export async function signIn(req, res, next) {
       if (!validpassword)
         return res.status(500).send({ message: "invalid password" });
 
-      if (user.role === "doctor") {
-        try {
-          let userId = user._id
-          let {doctor} = await findDoctor(userId);
+        // if (user.role === "doctor") {
+        // try {
+        //   let userId = user._id
+        //   let {doctor} = await findDoctor(userId);
           
-          let token = jwt.sign(
-            { _id:doctor._id },
-            process.env.TOKEN_KEY
-          );
+        //   let token = jwt.sign(
+        //     { _id:doctor._id },
+        //     process.env.TOKEN_KEY
+        //   );
           
-          let tokenRole = {
-            role: user.role,
-            token: token
-          }
+        //   let tokenRole = {
+        //     role: user.role,
+        //     token: token
+        //   }
           
-          return res.header("x-auth-token", token).send({ tokenRole });
+        //   return res.header("x-auth-token", token).send({ tokenRole });
 
-        } catch (error) {
-          return res.status(500).send({ message: "Sorry login failed try again" });
-        }
-      }
+        // } catch (error) {
+        //   return res.status(500).send({ message: "Sorry login failed try again" });
+        // }
+    // }
 
       let token = jwt.sign(
         { _id: user._id },

@@ -12,7 +12,7 @@ import { getAll,
 
 export async function appoinmentDataSave(req,res,next){
     try{
-        const userId = req.body.user._id
+        const userId = req.body.patient._id
         const appoinmentData = req.body
         const result = await saveAppoinment({
             ...appoinmentData,
@@ -25,10 +25,11 @@ export async function appoinmentDataSave(req,res,next){
 }
 
 
-export async function getAllAppoinments(req,res,next){
+export async function getAllAppoinmentsDoctorByToken(req,res,next){
     try{
-
-        const appoinmentData = await getAll()
+        const doctorId = req.body.doctor._id
+        console.log(doctorId)
+        const appoinmentData = await getAll(doctorId)
         res.status(200).send(appoinmentData)
 
     }catch(err){
@@ -37,7 +38,7 @@ export async function getAllAppoinments(req,res,next){
 }
 
 
-export async function getSingleAppoinments(req,res,next){
+export async function getSingleAppoinment(req,res,next){
     try{
         const appoinmentId = req.params.id
         const appoinmentData = await getSingle(appoinmentId)

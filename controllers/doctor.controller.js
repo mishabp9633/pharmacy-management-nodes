@@ -12,7 +12,8 @@ export async function updateDoctorByToken(req, res, next) {
 
   try {
 
-    let userId = req.body.patient._id
+    let userId = req.body.doctor._id
+    console.log(userId)
     let user = await findUserById(userId);
     if (!user) return res.status(400).send({ message: "user not found" })
 

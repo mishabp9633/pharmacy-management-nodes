@@ -24,20 +24,17 @@ const appoinmentSchema = new mongoose.Schema({
         
     doctorId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'Doctor',
+        ref:'User',
         required:true
     },
-    appoinmentDate:{
-        type:Date,
-        default:Date.now
-    },
-    // expieryOfAppoinment:{
-    //     type:Date  
+    // appoinmentDate:{
+    //     type:Date,   
+    //     default:Date.now
     // },
     allocatedToken:{
         type:Number,
         min:[0,"allocated Token cannot be negative"],
     }
-})
+},{timestamps:true})
 
 export const appoinmentModel = mongoose.model("Appoinment",appoinmentSchema)

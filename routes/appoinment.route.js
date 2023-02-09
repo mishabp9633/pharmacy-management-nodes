@@ -3,12 +3,12 @@ import { appoinmentDataSave,
     deleteAppoinment, 
     deleteAppoinmentByToken, 
     deleteFullAppoinment, 
-    getAllAppoinments, 
+    getAllAppoinmentsDoctorByToken, 
     getAllAppoinmentsByToken,
-    getSingleAppoinments,
     tokenAllocation, 
     updateAppoinment, 
-    updateAppoinmentByToken
+    updateAppoinmentByToken,
+    getSingleAppoinment
 } from '../controllers/appoinment.controller.js'
 import { appoinmentValidator } from '../middlewares/appoinment.middleware.js'
 import { tokenValidator } from '../middlewares/token.middleware.js'
@@ -20,8 +20,8 @@ const path = "/appoinment"
 
 router.post(`${path}/save`,patientMiddleware,appoinmentValidator,appoinmentDataSave)
 
-router.get(`${path}/all-doctor`,doctorMiddleware,getAllAppoinments)
-router.get(`${path}/single-doctor`,doctorMiddleware,getSingleAppoinments)
+router.get(`${path}/all-doctor`,doctorMiddleware,getAllAppoinmentsDoctorByToken)
+router.get(`${path}/single-doctor`,doctorMiddleware,getSingleAppoinment)
 router.get(`${path}/all-patient`,patientMiddleware,getAllAppoinmentsByToken)
 
 router.delete(`${path}/delete-doctor/:id`,doctorMiddleware,deleteAppoinment)

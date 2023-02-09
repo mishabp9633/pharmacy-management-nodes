@@ -9,6 +9,9 @@ import userRouter from './routes/user.route.js'
 import doctorRouter from './routes/doctor.route.js'
 import stockRouter from './routes/stock.route.js'
 import appoinmentRouter from './routes/appoinment.route.js'
+import prescriptionRouter from './routes/priscription.route.js'
+import pharmacybillRouter from './routes/pharmacybill.route.js'
+
 
 import {errorHandling} from './middlewares/error.middleware.js'
 
@@ -28,7 +31,9 @@ import {errorHandling} from './middlewares/error.middleware.js'
     userRouter,
     authenticationRouter,
     stockRouter,
-    appoinmentRouter
+    appoinmentRouter,
+    prescriptionRouter,
+    pharmacybillRouter
     )
  
 

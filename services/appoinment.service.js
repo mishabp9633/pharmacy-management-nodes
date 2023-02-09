@@ -10,25 +10,30 @@ export async function saveAppoinment(appoinmentData) {
 }
 
 
-export async function getAll(){
-    const appoinmentData = await appoinmentModel.find()
+export async function getAll(doctorId){
+    const appoinmentData = await appoinmentModel.find({doctorId:doctorId})
     .populate('userId',["name","place","mobileNo"])
+    .populate('doctorId',["name"])
     return {appoinmentData}
 }
 
 
 export async function getSingle(appoinmentId){
     const appoinmentData = await appoinmentModel.findById(appoinmentId)
-    if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
     .populate('userId',["name","place","mobileNo"])
+    .populate('doctorId',["name"])
+    if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
+    
     return {appoinmentData}
 }
 
 
 export async function getAllUserAppoinments(userId){
     const appoinmentData = await appoinmentModel.find({ userId:userId })
-    if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
     .populate('userId',["name","place","mobileNo"])
+    .populate('doctorId',["name"])
+    if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
+   
     return {appoinmentData}
 }
 
@@ -78,4 +83,13 @@ export async function Delete(userId){
 export async function deleteMany(){
     const appoinment = await appoinmentModel.deleteMany()
     return {appoinment}
+}
+
+
+//find userId (priscription controller)
+export async function findUserId(appoinmentId){
+    const appoinment = await appoinmentModel.findById(appoinmentId)
+    if(!appoinment) throw new HttpException(400, "No appoinment is there")
+    const userId = appoinment.userId
+    return {userId}
 }

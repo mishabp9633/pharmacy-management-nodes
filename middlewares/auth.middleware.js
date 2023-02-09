@@ -68,6 +68,7 @@ export async function adminMiddleware(req, res, next) {
 }
 
 
+
 export async function doctorMiddleware(req, res, next) {
     const token = req.header('Authorization') && req.header('Authorization').split('Bearer ')[1] || null;
 
@@ -94,13 +95,14 @@ export async function doctorMiddleware(req, res, next) {
             return res.status(403).send({ message: 'Access denied. Not an doctor' })
         }
 
-        req.body.doctor = doctor
+        req.body.doctor = user
         next()
     } catch (error) {
         console.log(error);
         return res.status(400).send({ message: "Invalid token" })
     }
 }
+
 
 
 export async function pharmacistMiddleware(req, res, next) {
@@ -141,6 +143,8 @@ export async function roleCheckMiddleware(req, res, next) {
         switch (user.role) {
             case 'pharmacist':
                 case 'admin':
+                    case 'doctor':
+                        
                 req.body.user = user;
                 next();
                 break;
