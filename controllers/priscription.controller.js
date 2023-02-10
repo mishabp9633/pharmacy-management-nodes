@@ -122,7 +122,7 @@ export async function updatePriscriptionByTokenDoctor(req, res, next) {
 }
 
 
-export async function updataPriscription(req, res, next) {
+export async function updatePriscription(req, res, next) {
     try {
         const prescriptionId = req.params.id
         const prescriptionData = req.body

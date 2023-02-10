@@ -2,6 +2,9 @@ import mongoose from 'mongoose'
 
 
 const prescriptionSchema = new mongoose.Schema({
+    // priscriptionId:{
+    //     type:Number,
+    // },
     appoinmentId:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Appoinment",
@@ -11,19 +14,6 @@ const prescriptionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    // QuantityOfMedicin:{
-    //     type:Number,
-    //     required:true
-    // },
-    // DateOfIssue:{
-    //     type:Date,
-    //     default:Date.now,
-    //     required:true
-    // }
-    // stockId:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref:"Stock"
-    // },
     doctorId:{
         type: mongoose.Schema.Types.ObjectId,
         ref:"User"
@@ -48,3 +38,18 @@ export const prescriptionModel = mongoose.model('Prescription',prescriptionSchem
 // Drug strength.
 // Dosage form.
 // Quantity prescribed
+
+
+    // QuantityOfMedicin:{
+    //     type:Number,
+    //     required:true
+    // },
+    // DateOfIssue:{
+    //     type:Date,
+    //     default:Date.now,
+    //     required:true
+    // }
+    // stockId:{
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref:"Stock"
+    // },

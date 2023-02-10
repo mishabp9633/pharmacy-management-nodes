@@ -5,7 +5,7 @@ import {
     getPriscriptionByTokenDoctor,
     getSinglePriscription,
     savePriscription,
-    updataPriscription,
+    updatePriscription,
     updatePriscriptionByTokenDoctor,
     getPriscriptionByTokenPatient,
     deletePriscriptionByTokenDoctor
@@ -28,7 +28,7 @@ router.get(`${path}/all-patient`,patientMiddleware,getPriscriptionByTokenPatient
 
 router.get(`${path}/single/:id`,roleCheckMiddleware,getSinglePriscription)
 
-router.put(`${path}/update/:id`,roleCheckMiddleware,updataPriscription)
+router.put(`${path}/update/:id`,roleCheckMiddleware,updatePriscription)
 
 router.put(`${path}/update-doctor`,doctorMiddleware,updatePriscriptionByTokenDoctor)
 

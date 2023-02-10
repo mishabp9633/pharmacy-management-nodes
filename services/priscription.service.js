@@ -89,3 +89,19 @@ export async function Delete(prescriptionId){
    return {prescriptionData}
 }
 
+
+//find userId (priscription controller)
+export async function findUserId(id){
+   const prescription = await prescriptionModel.findById(id)
+   if(!prescription) throw new HttpException(400, "No prescription is there")
+   const userId = prescription.userId
+   return {userId}
+}
+
+//find userId (priscription controller)
+export async function findDoctorId(id){
+   const prescription = await prescriptionModel.findById(id)
+   if(!prescription) throw new HttpException(400, "No prescription is there")
+   const doctorId = prescription.doctorId
+   return {doctorId}
+}

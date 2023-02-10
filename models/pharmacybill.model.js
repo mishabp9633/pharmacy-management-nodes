@@ -2,13 +2,18 @@ import mongoose from 'mongoose'
 
 
 const pharmacybillSchema = new mongoose.Schema({
-    patientName:{
-        type:String,
-        required:true
+  prescriptionId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Prescription',
+    required:true
+  },
+    patientId:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'User',
     },     
-    doctorName:{
-        type:String,
-        required:true
+    doctorId:{
+      type:mongoose.Schema.Types.ObjectId,
+      ref:'User',
     },
     medicine:[
         {
@@ -19,6 +24,9 @@ const pharmacybillSchema = new mongoose.Schema({
           quantity: {
             type: Number,
             default: 0
+          },
+          price:{
+            type:Number,
           }
         }
       ],
@@ -26,10 +34,7 @@ const pharmacybillSchema = new mongoose.Schema({
         type:Number,
         default:0
       }
-    // stockId:[{
-    //     type:mongoose.Schema.Types.ObjectId,
-    //     ref:'Stock'
-    // }]
+
 
 },{timestamps:true})
 

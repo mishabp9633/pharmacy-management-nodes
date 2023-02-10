@@ -1,32 +1,41 @@
-import { HttpException } from '../exceptions/exceptions.js';
-import {pharmacybillModel} from '../models/pharmacybill.model.js'
+import { pharmacybillModel } from '../models/pharmacybill.model.js'
 import stockModel from "../models/stock.model.js";
 import mongoose from 'mongoose'
 
+export async function saveBillData(billData, medicineArray, userId, doctorId) {
 
-export async function saveBillData(billData,medicineArray){
+    let totalPrice = 0;
 
-    console.log(medicineArray);
+    for (const item of medicineArray) {
+        const stockId = mongoose.Types.ObjectId(item.stockId);
+        const quantity = item.quantity;
 
-    await medicineArray.forEach(async item => {
-        console.log(item);
+        const medicine = await stockModel.findById(stockId);
 
-        let stockId = mongoose.Types.ObjectId(item.stockId)
-        let quantity =item.quantity
+        if (medicine.noInStock === 0) {
+            return;
+        }
 
-        const medicine = await stockModel.findById(stockId)     
+        const price = medicine.priceOfOne * quantity;
+        console.log("price", price);
+        item.price = price;
+        totalPrice += item.price;
+    }
 
-            if(medicine.noInStock===0) return 
-            const totalprice = medicine.priceOfOne*quantity
-            billData.totalprice=totalprice
-
-            let bill = new pharmacybillModel({...billData,totalPrice:totalprice}) 
-            bill = await bill.save()
-
-            medicine.noInStock -= quantity
-            await medicine.save()
-        
+    const bill = new pharmacybillModel({
+        ...billData,
+        totalPrice: totalPrice,
+        patientId: userId,
+        doctorId: doctorId,
     });
-    
-return 'successfull'
+    console.log(bill);
+    await bill.save();
+
+    for (const item of medicineArray) {
+        const medicine = await stockModel.findById(mongoose.Types.ObjectId(item.stockId));
+        medicine.noInStock -= item.quantity;
+        await medicine.save();
+    }
+
+    return "successfull";
 }

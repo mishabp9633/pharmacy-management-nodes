@@ -8,7 +8,7 @@ const router = express.Router()
 
 const path = "/patient"
 
-router.get(`${path}get`,patientMiddleware,getUserDetailsByToken)
+router.get(`${path}/get`,patientMiddleware,getUserDetailsByToken)
 router.put(`${path}/update`,patientMiddleware,updateUserByToken)
 router.delete(`${path}/dalete`,patientMiddleware,deleteUserByToken)
 
