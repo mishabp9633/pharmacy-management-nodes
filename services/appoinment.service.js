@@ -48,7 +48,7 @@ export async function updateTokenValue(data,appoinmentId){
 export async function update(data,appoinmentId){
 
     const appoinmentData = await appoinmentModel.findByIdAndUpdate(appoinmentId,data,{new:true})
-
+    if(!appoinmentData) throw new HttpException(400,'appoinment Data is not found')
     return {appoinmentData}
 }
 

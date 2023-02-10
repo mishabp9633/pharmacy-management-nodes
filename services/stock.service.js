@@ -46,3 +46,4 @@ export async function Delete(stockId){
    return {stock}
 }
 
+
