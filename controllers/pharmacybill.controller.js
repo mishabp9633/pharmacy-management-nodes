@@ -39,8 +39,9 @@ export async function save(req,res,next){
 
 export async function getAllPharmacyBill(req, res, next) {
     try {
-        
-       const bill = await getAll()
+        const pageNumber = req.query.pageNumber || 1
+        const pageSize = req.query.pageSize || 10
+       const bill = await getAll(pageNumber,pageSize)
 
        res.status(200).send(bill)
     } catch (err) {

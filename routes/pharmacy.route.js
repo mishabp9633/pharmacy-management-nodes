@@ -8,6 +8,7 @@ const router = express.Router()
 
 const path = "/patient"
 
+//...............patient...............//
 router.get(`${path}/get`,pharmacistMiddleware,getPharmacistDetailsByToken)
 
 

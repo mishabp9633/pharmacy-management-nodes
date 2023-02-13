@@ -14,14 +14,11 @@ const router = express.Router()
 
 const path = "/stock"
 
+//................admin and pharmacist....................//
 router.post(`${path}/new`,roleCheckMiddleware,stockValidator,saveStock )
-
 router.get(`${path}/all`,roleCheckMiddleware,getAllStock)
-
 router.get(`${path}/single/:id`,roleCheckMiddleware,getSingleStock)
-
 router.put(`${path}/update/:id`,roleCheckMiddleware,updateStoke)
-
 router.delete(`${path}/delete/:id`,roleCheckMiddleware,deleteStoke)
 
 

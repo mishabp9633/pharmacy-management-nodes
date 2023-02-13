@@ -52,7 +52,7 @@ export async function getAll() {
 
 
 //get single user (auth controller)
-export async function getSingle(userId) {
+export async function  getSingle(userId) {
   const user = await userModel
     .findById(userId,{},{projection:{password:0}})
   console.log(user);

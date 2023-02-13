@@ -14,15 +14,16 @@ const router = express.Router()
 
 const path = "/pharmacybill"
 
+//...............pharmacist...............//
 router.post(`${path}/new`,pharmacistMiddleware,pharmacybillValidator,save)
 
-router.get(`${path}/all`,roleCheckMiddleware,getAllPharmacyBill)
+//...............patient...............//
 router.get(`${path}/all-patient`,patientMiddleware,getPharmacybillByTokenPatient)
 
+//...............admin, pharmacist and doctor...............//
+router.get(`${path}/all`,roleCheckMiddleware,getAllPharmacyBill)
 router.get(`${path}/single/:id`,roleCheckMiddleware,getSinglePharmacybill)
-
 router.put(`${path}/update/:id`,roleCheckMiddleware,updatePharmacybill)
-
 router.delete(`${path}/delete/:id`,roleCheckMiddleware,deletePharmacybill)
 
 

@@ -44,12 +44,14 @@ export async function saveBillData(billData, medicineArray, userId, doctorId) {
 
 
 
-export async function getAll(){
+export async function getAll(pageNumber,pageSize){
     const pharmacybill = await pharmacybillModel.find()
     .populate("patientId",["name","place","mobileNo"])
     .populate("doctorId",["name","mobileNo"])
     .populate("prescriptionId",["medicinNameWithQty"])
     .populate("medicine.stockId",["medicinName","dateOfAdding"])
+    .limit(pageSize)
+    .skip((pageNumber - 1) * pageSize)
     return {pharmacybill}
  }
 

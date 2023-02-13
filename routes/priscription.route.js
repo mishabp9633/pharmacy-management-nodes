@@ -18,23 +18,21 @@ const router = express.Router()
 
 const path = "/prescription"
 
-router.post(`${path}/new`,priscriptionValidator,doctorMiddleware,savePriscription)
 
+
+//...............pharmacist and doctor ...............//
 router.get(`${path}/all`,roleCheckMiddleware,getAllPriscriptionPharmacist)
-
-router.get(`${path}/all-doctor`,doctorMiddleware,getPriscriptionByTokenDoctor)
-
-router.get(`${path}/all-patient`,patientMiddleware,getPriscriptionByTokenPatient)
-
 router.get(`${path}/single/:id`,roleCheckMiddleware,getSinglePriscription)
-
 router.put(`${path}/update/:id`,roleCheckMiddleware,updatePriscription)
-
-router.put(`${path}/update-doctor`,doctorMiddleware,updatePriscriptionByTokenDoctor)
-
 router.delete(`${path}/delete/:id`,roleCheckMiddleware,deletePriscription)
 
+//................doctor................//
+router.post(`${path}/new`,priscriptionValidator,doctorMiddleware,savePriscription)
+router.get(`${path}/all-doctor`,doctorMiddleware,getPriscriptionByTokenDoctor)
+router.put(`${path}/update-doctor`,doctorMiddleware,updatePriscriptionByTokenDoctor)
 router.delete(`${path}/delete-doctor`,doctorMiddleware,deletePriscriptionByTokenDoctor)
 
+//................patient....................//
+router.get(`${path}/all-patient`,patientMiddleware,getPriscriptionByTokenPatient)
 
 export default router
