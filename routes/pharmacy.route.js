@@ -1,17 +1,12 @@
-import express from 'express'
-import { getPharmacistDetailsByToken } from "../controllers/pharmacy.controller.js"
-import { pharmacistMiddleware } from '../middlewares/auth.middleware.js'
+import express from "express";
+import { getPharmacistDetailsByToken } from "../controllers/pharmacy.controller.js";
+import { pharmacistMiddleware } from "../middlewares/auth.middleware.js";
 
+const router = express.Router();
 
-
-const router = express.Router()
-
-const path = "/patient"
+const path = "/patient";
 
 //...............patient...............//
-router.get(`${path}/get`,pharmacistMiddleware,getPharmacistDetailsByToken)
-
-
-
+router.get(`${path}/get`, pharmacistMiddleware, getPharmacistDetailsByToken);
 
 export default router;

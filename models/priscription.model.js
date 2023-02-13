@@ -1,34 +1,35 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-
-const prescriptionSchema = new mongoose.Schema({
+const prescriptionSchema = new mongoose.Schema(
+  {
     // priscriptionId:{
     //     type:Number,
     // },
-    appoinmentId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Appoinment",
-        required:true
-      },
-    medicinNameWithQty:{
-        type:String,
-        required:true
+    appoinmentId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Appoinment",
+      required: true,
     },
-    doctorId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"User"
+    medicinNameWithQty: {
+      type: String,
+      required: true,
     },
-    userId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+    doctorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-   
-},{timestamps:true})
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  },
+  { timestamps: true }
+);
 
-export const prescriptionModel = mongoose.model('Prescription',prescriptionSchema)
-
-
-
+export const prescriptionModel = mongoose.model(
+  "Prescription",
+  prescriptionSchema
+);
 
 // Date of issue.
 // Patient's name and address.
@@ -39,17 +40,16 @@ export const prescriptionModel = mongoose.model('Prescription',prescriptionSchem
 // Dosage form.
 // Quantity prescribed
 
-
-    // QuantityOfMedicin:{
-    //     type:Number,
-    //     required:true
-    // },
-    // DateOfIssue:{
-    //     type:Date,
-    //     default:Date.now,
-    //     required:true
-    // }
-    // stockId:{
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref:"Stock"
-    // },
+// QuantityOfMedicin:{
+//     type:Number,
+//     required:true
+// },
+// DateOfIssue:{
+//     type:Date,
+//     default:Date.now,
+//     required:true
+// }
+// stockId:{
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref:"Stock"
+// },
