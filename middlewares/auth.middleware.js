@@ -78,14 +78,7 @@ export async function doctorMiddleware(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_KEY)
-        const doctor = await doctorModel.findOne({ userId: decoded._id })
-
-        if (!doctor) {
-            return res.status(400).send({ message: 'Invalid doctor' })
-        }
-
-        const userId = doctor.userId
-        const user = await userModel.findOne({ _id: userId })
+        const user = await userModel.findOne({ _id: decoded._id })
 
         if (!user) {
             return res.status(400).send({ message: 'Invalid user' })
@@ -156,51 +149,4 @@ export async function roleCheckMiddleware(req, res, next) {
         return res.status(400).send({ message: "Invalid token" });
     }
 }
-
-
-
-//single checking
-// export async function roleCheckMiddleware(req, res, next) {
-//     const token = req.header('Authorization') && req.header('Authorization').split('Bearer ')[1] || null;
-//     if (!token) {
-//         return res.status(401).send({ message: "Access denied. No token provided" });
-//     }
-
-//     try {
-//         const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-//         const user = await userModel.findOne({ _id: decoded._id });
-//         if (!user) {
-//             return res.status(400).send({ message: 'Invalid user' });
-//         }
-
-//         switch (user.role) {
-//             case 'patient':
-//                 req.body.user = user;
-//                 next();
-//                 break;
-//             case 'admin':
-//                 req.body.user = user;
-//                 next();
-//                 break;
-//             case 'doctor':
-//                 const doctor = await doctorModel.findOne({ _id: decoded._id });
-//                 if (!doctor) {
-//                     return res.status(400).send({ message: 'Invalid doctor' });
-//                 }
-//                 req.body.doctor = doctor;
-//                 next();
-//                 break;
-//             case 'pharmacist':
-//                 req.body.user = user;
-//                 next();
-//                 break;
-//             default:
-//                 return res.status(403).send({ message: 'Access denied. Not an authorized role' });
-//         }
-//     } catch (error) {
-//         console.log(error);
-//         return res.status(400).send({ message: "Invalid token" });
-//     }
-// }
-
 
