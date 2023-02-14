@@ -48,8 +48,6 @@ export const userSchema = new mongoose.Schema({
     default: "patient",
     enum:["patient","doctor","admin","pharmacist"]
   },
-
-
 });
 
 const user = mongoose.model("User", userSchema);

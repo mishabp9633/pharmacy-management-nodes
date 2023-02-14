@@ -19,7 +19,7 @@ const router = express.Router()
 const path = "/appoinment"
 
 //..............patient.............//
-router.post(`${path}/save`,patientMiddleware,appoinmentValidator,appoinmentDataSave)
+router.post(`${path}/new`,patientMiddleware,appoinmentValidator,appoinmentDataSave)
 router.get(`${path}/all-patient`,patientMiddleware,getAllAppoinmentsByToken)
 router.delete(`${path}/delete-patient`,patientMiddleware,deleteAppoinmentByToken)
 router.put(`${path}/update`,patientMiddleware,updateAppoinmentByToken)

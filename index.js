@@ -11,6 +11,7 @@ import stockRouter from './routes/stock.route.js'
 import appoinmentRouter from './routes/appoinment.route.js'
 import prescriptionRouter from './routes/priscription.route.js'
 import pharmacybillRouter from './routes/pharmacybill.route.js'
+import searchRouter from './routes/search.route.js'
 
 
 import {errorHandling} from './middlewares/error.middleware.js'
@@ -33,7 +34,8 @@ import {errorHandling} from './middlewares/error.middleware.js'
     stockRouter,
     appoinmentRouter,
     prescriptionRouter,
-    pharmacybillRouter
+    pharmacybillRouter,
+    searchRouter
     )
  
 
