@@ -78,7 +78,7 @@ export async function doctorMiddleware(req, res, next) {
 
     try {
         const decoded = jwt.verify(token, process.env.TOKEN_KEY)
-        const doctor = await doctorModel.findOne({ _id: decoded._id })
+        const doctor = await doctorModel.findOne({ userId: decoded._id })
 
         if (!doctor) {
             return res.status(400).send({ message: 'Invalid doctor' })

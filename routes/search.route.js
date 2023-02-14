@@ -9,10 +9,10 @@ const router = express.Router()
 const path = "/search"
 
 //.....................doctor....................//
-router.get(`${path}/get-patients`,searchPatient)
+router.get(`${path}/get-patients`,doctorMiddleware,searchPatient)
 
 //.....................patient...................//
-router.get(`${path}/get-doctors`,searchDoctor)
+router.get(`${path}/get-doctors`,patientMiddleware,searchDoctor)
 
 
 
