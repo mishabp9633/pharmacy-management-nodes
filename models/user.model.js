@@ -5,6 +5,10 @@ import { isValidEmail, isValidMobileNumber } from '../utils/util.js'
 
 
 export const userSchema = new mongoose.Schema({
+  doctorId:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:'Doctor'
+  },
   username: {
     type: mongoose.Schema.Types.String,
     required: true,

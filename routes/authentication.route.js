@@ -4,7 +4,7 @@ import { signUpDoctor,signUpPatient, signIn, updateProfile,deleteProfile,
       getSingleDoctors, getAllPharmacy, getSinglePharmacy,logoutUser,getAdminProfileByToken
     } from '../controllers/authentication.controller.js'
 import { loginValidator } from '../middlewares/login.validation.middleware.js'
-import { adminMiddleware } from '../middlewares/auth.middleware.js'
+import { adminMiddleware, adminpatientMiddleware } from '../middlewares/auth.middleware.js'
 import { userValidation } from '../middlewares/user.validation.js'
 import { doctorValidation } from '../middlewares/doctor.validation.js'
 
@@ -17,7 +17,7 @@ const path = "/authentication"
 
 //.................admin................//
 router.get(`${path}/all-patients`,adminMiddleware, getAllUsers)
-router.get(`${path}/all-doctors`,adminMiddleware, getAllDoctors)
+router.get(`${path}/all-doctors`,adminpatientMiddleware, getAllDoctors)
 router.get(`${path}/all-pharmacist`,adminMiddleware, getAllPharmacy)
 router.get(`${path}/admin-profile`,adminMiddleware,getAdminProfileByToken)
 router.get(`${path}/single-patients/:id`,adminMiddleware, getSingleUsers)

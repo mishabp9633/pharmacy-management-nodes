@@ -64,7 +64,7 @@ export async function signUpDoctor(req, res, next) {
 }
 
 
-//doctor register
+//patient register
 export async function signUpPatient(req, res, next) {
 
   let username = req.body.user.username
@@ -110,28 +110,6 @@ export async function signIn(req, res, next) {
 
       if (!validpassword)
         return res.status(500).send({ message: "invalid password" });
-
-        // if (user.role === "doctor") {
-        // try {
-        //   let userId = user._id
-        //   let {doctor} = await findDoctor(userId);
-          
-        //   let token = jwt.sign(
-        //     { _id:doctor._id },
-        //     process.env.TOKEN_KEY
-        //   );
-          
-        //   let tokenRole = {
-        //     role: user.role,
-        //     token: token
-        //   }
-          
-        //   return res.header("x-auth-token", token).send({ tokenRole });
-
-        // } catch (error) {
-        //   return res.status(500).send({ message: "Sorry login failed try again" });
-        // }
-    // }
 
       let token = jwt.sign(
         { _id: user._id },

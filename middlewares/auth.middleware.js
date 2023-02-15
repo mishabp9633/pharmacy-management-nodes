@@ -150,3 +150,34 @@ export async function roleCheckMiddleware(req, res, next) {
     }
 }
 
+
+//single checking
+export async function adminpatientMiddleware(req, res, next) {
+    const token = req.header('Authorization') && req.header('Authorization').split('Bearer ')[1] || null;
+    if (!token) {
+        return res.status(401).send({ message: "Access denied. No token provided" });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        const user = await userModel.findOne({ _id: decoded._id });
+        if (!user) {
+            return res.status(400).send({ message: 'Invalid user' });
+        }
+
+        switch (user.role) {
+            case 'patient':
+                case 'admin':
+                    
+                        
+                req.body.user = user;
+                next();
+                break;
+            default:
+                return res.status(403).send({ message: 'Access denied. Not an authorized role' });
+        }
+    } catch (error) {
+        console.log(error);
+        return res.status(400).send({ message: "Invalid token" });
+    }
+}
