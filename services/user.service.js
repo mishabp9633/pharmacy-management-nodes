@@ -1,4 +1,5 @@
 import userModel from "../models/user.model.js"
+import {HttpException} from '../exceptions/exceptions.js';
 
 //.................auth controller start................//
 

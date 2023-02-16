@@ -64,7 +64,7 @@ export async function signUpDoctor(req, res, next) {
 }
 
 
-//patient register
+//doctor register
 export async function signUpPatient(req, res, next) {
 
   let username = req.body.user.username
@@ -110,7 +110,7 @@ export async function signIn(req, res, next) {
 
       if (!validpassword)
         return res.status(500).send({ message: "invalid password" });
-
+  
       let token = jwt.sign(
         { _id: user._id },
         process.env.TOKEN_KEY

@@ -1,4 +1,5 @@
 import doctorModel from "../models/doctor.model.js";
+import {HttpException} from '../exceptions/exceptions.js';
 // import userModel from"../models/user.model.js"
 
 //..............auth controller start.................//
@@ -13,7 +14,8 @@ export async function findDoctor(userId){
 export async function save(data) {
   const doctor = new doctorModel(data);
   await doctor.save();
-  return { doctor };
+  const doctorId = doctor._id
+  return { doctorId };
 }
 
 //update doctor (auth controller)
