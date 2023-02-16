@@ -53,13 +53,13 @@ export async function update(data,appoinmentId){
 }
 
 
-export async function updateByToken(userId,data) {
+export async function updateByToken(userId,data,appoinmentId) {
 
       const appoinment = await appoinmentModel.findOne({ userId:userId })
       console.log(appoinment);
     
     if(!appoinment) throw new HttpException(400, "No appoinment is there")
-    const appoinmentId = appoinment._id
+    // const appoinmentId = appoinment._id
 
   
     const appoinmentData = await appoinmentModel.findByIdAndUpdate(appoinmentId,data,{new:true})
@@ -69,11 +69,18 @@ export async function updateByToken(userId,data) {
 }
 
 
-export async function Delete(userId){
+export async function Delete(appoinmentId){
+    const appoinmentData = await appoinmentModel.findByIdAndDelete(appoinmentId)
+    if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
+    return {appoinmentData}
+}
+
+
+export async function DeleteByToken(userId,appoinmentId){
     const appoinment = await appoinmentModel.findOne({userId:userId})
     if(!appoinment) throw new HttpException(400, "No appoinment is there")
 
-    const appoinmentId = appoinment._id
+    // const appoinmentId = appoinment._id
 
     const appoinmentData = await appoinmentModel.findByIdAndDelete(appoinmentId)
     return {appoinmentData}

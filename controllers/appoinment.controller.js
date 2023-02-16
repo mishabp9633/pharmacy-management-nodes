@@ -6,7 +6,8 @@ import { getAll,
      getSingle, 
     updateTokenValue,
     updateByToken,  
-    deleteMany
+    deleteMany,
+    DeleteByToken
 } from "../services/appoinment.service.js"
 
 
@@ -93,7 +94,8 @@ export async function deleteAppoinment(req,res,next){
 export async function deleteAppoinmentByToken(req,res,next){
     try{
         const userId = req.body.patient._id
-        const appoinments = await Delete(userId);
+        const appoinmentId = req.params.id
+        const appoinments = await DeleteByToken(userId,appoinmentId);
         res.status(200).send(appoinments)
 
     }catch(err){
@@ -133,8 +135,9 @@ export async function updateAppoinmentByToken(req,res,next){
     try{
 
         const userId = req.body.patient._id
+        const appoinmentId = req.params.id
         const appoinmentData = req.body
-        const appoinments = await updateByToken(userId,appoinmentData);
+        const appoinments = await updateByToken(userId,appoinmentData,appoinmentId);
         res.status(200).send(appoinments)
 
     }catch(err){
