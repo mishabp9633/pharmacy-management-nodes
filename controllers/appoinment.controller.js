@@ -9,18 +9,26 @@ import { getAll,
     deleteMany,
     DeleteByToken
 } from "../services/appoinment.service.js"
+import { findDoctorUserId } from "../services/doctor.service.js"
 
 
 export async function appoinmentDataSave(req,res,next){
     try{
         const userId = req.body.patient._id
         const appoinmentData = req.body
+        const doctorId = req.body.doctorId
+
+        const {doctor} = await findDoctorUserId(doctorId)
+        console.log(doctor);
         const result = await saveAppoinment({
             ...appoinmentData,
-            userId:userId
+            userId:userId,
+            doctorId:doctorId,
+            doctor:doctor.userId
         })
         res.status(200).send(result)
     }catch(err){
+        console.log("err:",err);
         next(err)
     }  
 }

@@ -65,5 +65,11 @@ export async function getSingelDoctorByToken(id) {
 }
 
 
+//save appoinment function (appoinment controller)
+export async function findDoctorUserId(doctorId){
+  const doctor = await doctorModel.findById(doctorId)
+  // const doctorid = doctor.userId
+  return {doctor}
+}
 
 

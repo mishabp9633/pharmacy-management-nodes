@@ -24,8 +24,12 @@ const appoinmentSchema = new mongoose.Schema({
         
     doctorId:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User',
+        ref:'Doctor',
         required:true
+    },
+    doctor:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User',
     },
     // appoinmentDate:{
     //     type:Date,   

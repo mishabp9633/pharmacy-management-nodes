@@ -148,8 +148,9 @@ export async function updateProfile(req, res, next) {
     }
 
     if (user.role === "doctor") {
-      const doctor = await findDoctor(userId)
+      const {doctor} = await findDoctor(userId)
       const doctorId = doctor._id;
+      console.log("doctorId....",doctorId);
       const doctorData = req.body.doctor
 
       await updateDoctor(
@@ -160,7 +161,7 @@ export async function updateProfile(req, res, next) {
     }
 
     if (user.role === "pharmacist") {
-      const pharmacist = await findUserById(userId)
+      const {pharmacist} = await findUserById(userId)
       const pharmacistId = pharmacist._id;
       const pharmacistData = req.body.user
 
@@ -181,31 +182,38 @@ export async function updateProfile(req, res, next) {
 
 
 
+
 //delete profile
 export async function deleteProfile(req, res, next) {
-
   try {
-    const userId = req.params.id
-    let {user} = await findUserById(userId);
-    if (!user) return res.status(400).send("user not found")
-
-    if (user) {
-      await deleteUser(userId)
+    const userId = req.params.id;
+    const { user } = await findUserById(userId);
+    if (!user) {
+      return res.status(400).send("User not found.");
     }
 
+    // Delete user document
+    await deleteUser(userId);
+
+    // If user is a doctor, delete doctor document
     if (user.role === "doctor") {
-      const doctor = await findDoctor(userId)
-      const doctorId = doctor._id;
-      await deleteDoctor(doctorId)
+      const {doctor} = await findDoctor(userId);
+      if (doctor) {
+        const doctorId = doctor._id;
+        await deleteDoctor(doctorId);
+      } else {
+        console.log("Doctor document not found for user:", user);
+      }
     }
 
-    console.log(user);
     res.status(200).send({ success: true });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     next(err);
   }
 }
+
+
 
 
 //get all patients

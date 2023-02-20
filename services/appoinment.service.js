@@ -13,7 +13,8 @@ export async function saveAppoinment(appoinmentData) {
 export async function getAll(doctorId){
     const appoinmentData = await appoinmentModel.find({doctorId:doctorId})
     .populate('userId',["name","place","mobileNo"])
-    .populate('doctorId',["name"])
+    .populate('doctor',["name","mobileNo"])
+    .populate('doctorId',["department","qualification"])
     return {appoinmentData}
 }
 
@@ -21,6 +22,7 @@ export async function getAll(doctorId){
 export async function getSingle(appoinmentId){
     const appoinmentData = await appoinmentModel.findById(appoinmentId)
     .populate('userId',["name","place","mobileNo"])
+    .populate('doctor',["name","mobileNo"])
     .populate('doctorId',["name"])
     if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
     
@@ -31,6 +33,7 @@ export async function getSingle(appoinmentId){
 export async function getAllUserAppoinments(userId){
     const appoinmentData = await appoinmentModel.find({ userId:userId })
     .populate('userId',["name","place","mobileNo"])
+    .populate('doctor',["name","mobileNo"])
     .populate('doctorId',["name"])
     if(!appoinmentData) throw new HttpException(400, "No appoinment is there")
    
