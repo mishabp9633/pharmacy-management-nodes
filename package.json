@@ -20,7 +20,8 @@
     "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "mongodb": "^4.12.1",
-    "mongoose": "^6.8.3"
+    "mongoose": "^6.8.3",
+    "passport": "^0.6.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"

@@ -8,15 +8,17 @@ import { adminMiddleware, adminpatientMiddleware } from '../middlewares/auth.mid
 import { userValidation } from '../middlewares/user.validation.js'
 import { doctorValidation } from '../middlewares/doctor.validation.js'
 
-
-
+import { authMiddleware ,role,ROLES} from '../middlewares/authOneCheck.js'
 
 const router = express.Router()
 
 const path = "/authentication"
 
 //.................admin................//
-router.get(`${path}/all-patients`,adminMiddleware, getAllUsers)
+router.get(`${path}/all-patients`,authMiddleware, role.check(ROLES.admin), getAllUsers)
+
+// router.get(`${path}/all-patients`,adminMiddleware, getAllUsers)
+
 router.get(`${path}/all-doctors`,adminpatientMiddleware, getAllDoctors)
 router.get(`${path}/all-pharmacist`,adminMiddleware, getAllPharmacy)
 router.get(`${path}/admin-profile`,adminMiddleware,getAdminProfileByToken)
